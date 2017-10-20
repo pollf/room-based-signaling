@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+  <title>signaling client side</title>
+</head>
+
+<body>
+  <div id="root">
+    <br>
+    Room Name for sending and receiving messages:<br>
+    <input type="text" name="roomName" id="txtRoomName" value="room1">
+    <button id="btnSetRoomName" type="button">Set roomName</button>
+    <br>
+    <br>
+    Your message:<br>
+    <input type="text" name="message" id="txtMessage" value="some message">
+    <button id="btnSendMessage" type="button">Send message</button>
+  </div>
+
+  <script>
+
+    // change room
+    $(function() {
+      let socket;
+      let roomName;
+
+      $("#btnSetRoomName").click( function()  {
+             socket = io.connect();
+              roomName = $('#txtRoomName').val();
+              console.log("Setting room to " + roomName);
+              socket.on('connect', function() {
+                // Connected, let's sign-up for to receive messages for this room
+                  socket.emit('room', roomName);
+              });
+
+              socket.on('meetingSignal', function(data) {
+                console.log('Incoming meetingSignal:', data);
+              } );
+            }
+         );
+
+         $("#btnSendMessage").click( function()  {
+               let message = $('#txtMessage').val();
+               console.log("Sending message " + message);
+               socket.emit("meetingSignal", message);
+         });
+    });
+  </script>
+</body>
+</html>

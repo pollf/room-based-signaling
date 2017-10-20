@@ -1,0 +1,23 @@
+{
+  "name": "room-based-signaling",
+  "version": "1.0.0",
+  "description": "a simple test for room based signaling over socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pollf/room-based-signaling.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pollf/room-based-signaling/issues"
+  },
+  "homepage": "https://github.com/pollf/room-based-signaling#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "socket.io": "^2.0.3"
+  }
+}
